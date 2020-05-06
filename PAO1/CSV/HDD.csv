@@ -1,0 +1,6 @@
+price,stock ,purchaseDate,manufacturer,color,capacity,cache,rpm
+80,5,2018-10-30,SeagateBarraCuda,grey,2000,256,7200
+130,20,2019-02-11,SeagateBarraCuda,grey,4000,256,5400
+200,15,2019-03-21,WDRedPro,grey,4000,256,7200
+70,10,2019-04-25,ToshibaP300,grey,2000,64,7200
+50,10,2018-05-20,WDBlue,black,1000,64,7200

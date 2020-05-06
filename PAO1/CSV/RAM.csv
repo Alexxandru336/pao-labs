@@ -1,0 +1,8 @@
+﻿price,stock,purchaseDate,manufacturer,color,type,speed,size,voltage
+900,3,2018-02-20,G.Skill Trident Z,silver,quad-channel,3466 Mhz,64,1.35
+30,5,2019-03-10,HyperX Fury,blue,single,1600Mhz,4,1
+60,10,2019-03-10,Corsair Vengeance ,black,single,2400Mhz,8,1.2
+30,5,2018-02-20,HyperX Fury,black,single,2400Mhz,4,0.9
+100,20,2019-03-10,Corsair Vengeance ,black,dual-channel,2400Mhz,16,2.4
+55,15,2019-03-10,ADATA XPG Gammix,black,single,3000Mhz,8,1.3
+140,10,2018-02-20,HyperX Predator,rgb,dual-channel,3200Mhz,16,2.5
