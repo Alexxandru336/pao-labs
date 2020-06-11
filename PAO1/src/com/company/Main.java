@@ -1,12 +1,14 @@
 package com.company;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import com.company.helper.CSVHelper;
 import com.company.products.*;
+import com.company.services.JDBCConnection;
 import com.company.services.UserOptions;
 import com.company.human.Customer;
 
@@ -119,11 +121,16 @@ public class Main {
             Customer pers = new Customer();
             ArrayList<Product> cos = new ArrayList<Product>();
 
+
+
             System.out.println("Clientul nr. " + pers.getTotal());
             pers.read();
             while ( 1 == 1 ) {
 
                 UserOptions userOptions = new UserOptions();
+//                System.out.println("Inainte de conexiune");
+
+                System.out.println("Dupa de conexiune");
                 System.out.println("Search menu:");
                 System.out.println("1. Search CPUs");
                 System.out.println("2. Search HDDs");
@@ -137,6 +144,10 @@ public class Main {
                 System.out.println("10. Introdu un produs de cumparat");
                 System.out.println("11. Exit");
                 System.out.println("12. Urmatorul client");
+                System.out.println("13. Creaza tablelul CPUs (CREATE)");
+                System.out.println("14. Schimba pretul tuturor CPUs in 100 (UPDATE)");
+                System.out.println("15. Arata toate produsele CPU cu cateva informatii(READ)");
+                System.out.println("16. Sterge o intrare din CPU(DELETE)");
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Optiunea este:");
                 int option = scanner.nextInt();
@@ -221,11 +232,51 @@ public class Main {
                     break;
                 }
 
-                if (option > 11 || option < 1)
+                if (option > 16 || option < 1)
                     System.out.println("Invalid");
+                if(option == 13){
+                    try{
+                        userOptions.createCPUS();
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch(SQLException e) {
+                        System.out.println("Eroarea este:" + e);
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                }
+                if(option == 14){
+                    try{
+                        userOptions.updateCPUS();
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch(SQLException e) {
+                        System.out.println("Eroarea este:" + e);
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                }
+                if(option == 15){
+                    try{
+                        userOptions.readCPUS();
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch(SQLException e) {
+                        System.out.println("Eroarea este:" + e);
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                }
+                if(option == 16){
+                    try{
+                        userOptions.deleteCPUS();
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch(SQLException e) {
+                        System.out.println("Eroarea este:" + e);
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                }
                 pressAnyKeyToContinue();
             }
+
         }
+
+
+
 
     }
 

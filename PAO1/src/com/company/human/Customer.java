@@ -27,7 +27,7 @@ public class Customer implements Clients{
         System.out.println("Hello MR/MRS Cashier! Please enter your client's name:");
         this.name = scanner.nextLine();
 
-        System.out.println("Say hello to you client " + name + ". What method of payment do they choose?(cash,card):");
+        System.out.println("Say hello to your client " + name + ". What method of payment do they choose?(cash,card):");
         this.paymentMet = scanner.nextLine();
     }
 }
