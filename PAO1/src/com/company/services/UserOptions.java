@@ -226,8 +226,8 @@ public class UserOptions {
 
         Statement stmt = conn.createStatement();
         ResultSet rst;
-
-        rst=stmt.executeQuery("CREATE TABLE cpus (" +
+        rst=stmt.executeQuery("IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='cpus' and xtype='U')"+
+                "CREATE TABLE cpus (" +
                 "nume VARCHAR(10) primary key," +
                 "price INT," +
                 "stock INT," +
@@ -239,7 +239,67 @@ public class UserOptions {
                 "threads INT," +
                 "lithography INT," +
                 "maximum_memory INT);");
-        System.out.println("AICI" + rst);
+        System.out.println("AICI: " + rst);
+        stmt.close();
+        conn.close();
+
+
+    }
+
+    public void insertCPUS(Product[] prod) throws SQLException {
+        Connection conn = null;
+        try {
+
+            String dbURL = "jdbc:sqlserver://ANDREI-LAPTOP-O\\SQLEXPRESS;databaseName=pao";
+            String user = "sa";
+            String pass = "1234";
+            conn = DriverManager.getConnection(dbURL, user, pass);
+            System.out.println(conn);
+//            if (conn != null) {
+//                DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
+//                System.out.println("Driver name: " + dm.getDriverName());
+//                System.out.println("Driver version: " + dm.getDriverVersion());
+//                System.out.println("Product name: " + dm.getDatabaseProductName());
+//                System.out.println("Product version: " + dm.getDatabaseProductVersion());
+//            }
+//            System.out.println("am trecut prin conexiune");
+
+        } catch (SQLException ex) {
+//            ex.printStackTrace();
+        }
+
+        Statement stmt = conn.createStatement();
+        ResultSet rst;
+        java.util.Date date=new java.util.Date();
+        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
+        PreparedStatement ps;
+
+        ArrayList<Product> cpus = new ArrayList<Product>();
+
+        for (int i=0; i < prod.length; i++){
+            if (prod[i].getCat().contains("CPU"))
+                cpus.add(prod[i]);
+        }
+
+        for(int i=0; i<cpus.size(); i++){
+
+        ps=conn.prepareStatement(
+                "INSERT INTO cpus " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                );
+        ps.setString(1, cpus.get(i).getName());
+        ps.setFloat(2, cpus.get(i).getPrice());
+        ps.setInt(3, cpus.get(i).getStock());
+        ps.setDate(4,sqlDate);
+        ps.setString(5, cpus.get(i).getSocket());
+        ps.setDouble(6, cpus.get(i).getFrequency());
+        ps.setDouble(7, cpus.get(i).getTurboFrequency());
+        ps.setInt(8, cpus.get(i).getCores());
+        ps.setInt(9, cpus.get(i).getThreads());
+        ps.setInt(10, cpus.get(i).getLithography());
+        ps.setInt(11, cpus.get(i).getMaximumMemory());
+        ps.executeUpdate();
+        }
         stmt.close();
         conn.close();
 
@@ -355,6 +415,42 @@ public class UserOptions {
         ResultSet rst;
 
         rst=stmt.executeQuery("DELETE TOP (1) "+"FROM cpus");
+
+
+        rst.close();
+
+        stmt.close();
+        conn.close();
+
+
+    }
+
+    public void dropCPUS() throws SQLException {
+        Connection conn = null;
+        try {
+
+            String dbURL = "jdbc:sqlserver://ANDREI-LAPTOP-O\\SQLEXPRESS;databaseName=pao";
+            String user = "sa";
+            String pass = "1234";
+            conn = DriverManager.getConnection(dbURL, user, pass);
+            System.out.println(conn);
+//            if (conn != null) {
+//                DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
+//                System.out.println("Driver name: " + dm.getDriverName());
+//                System.out.println("Driver version: " + dm.getDriverVersion());
+//                System.out.println("Product name: " + dm.getDatabaseProductName());
+//                System.out.println("Product version: " + dm.getDatabaseProductVersion());
+//            }
+//            System.out.println("am trecut prin conexiune");
+
+        } catch (SQLException ex) {
+//            ex.printStackTrace();
+        }
+
+        Statement stmt = conn.createStatement();
+        ResultSet rst;
+
+        rst=stmt.executeQuery("DROP TABLE cpus ");
 
 
         rst.close();

@@ -17,6 +17,34 @@ public class Product {
         return "";
     }
 
+    public String getSocket() {
+        return null;
+    }
+
+    public double getFrequency() {
+        return 0;
+    }
+
+    public int getMaximumMemory() {
+        return 0;
+    }
+
+    public int getLithography() {
+        return 0;
+    }
+
+    public int getThreads() {
+        return 0;
+    }
+
+    public int getCores() {
+        return 0;
+    }
+
+    public double getTurboFrequency() {
+        return 0;
+    }
+
     public String getModel() {
         return "";
     }
@@ -36,6 +64,7 @@ public class Product {
     public int getStock() {
         return Stock;
     }
+
 
     public void setStock(int stock) {
         Stock = stock;

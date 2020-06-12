@@ -148,6 +148,8 @@ public class Main {
                 System.out.println("14. Schimba pretul tuturor CPUs in 100 (UPDATE)");
                 System.out.println("15. Arata toate produsele CPU cu cateva informatii(READ)");
                 System.out.println("16. Sterge o intrare din CPU(DELETE)");
+                System.out.println("17. Insereaza datele csv din CPU(INSERT)");
+                System.out.println("18. Drop CPU(DROP)");
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Optiunea este:");
                 int option = scanner.nextInt();
@@ -232,14 +234,14 @@ public class Main {
                     break;
                 }
 
-                if (option > 16 || option < 1)
+                if (option > 18 || option < 1)
                     System.out.println("Invalid");
                 if(option == 13){
                     try{
                         userOptions.createCPUS();
                         TimeUnit.SECONDS.sleep(3);
                     } catch(SQLException e) {
-                        System.out.println("Eroarea este:" + e);
+                        System.out.println("Eroarea este (CREATE):" + e);
                         TimeUnit.SECONDS.sleep(3);
                     }
                 }
@@ -264,6 +266,25 @@ public class Main {
                 if(option == 16){
                     try{
                         userOptions.deleteCPUS();
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch(SQLException e) {
+                        System.out.println("Eroarea este:" + e);
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                }
+
+                if(option == 17){
+                    try{
+                        userOptions.insertCPUS(products);
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch(SQLException e) {
+                        System.out.println("Eroarea este:" + e);
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                }
+                if(option == 18){
+                    try{
+                        userOptions.dropCPUS();
                         TimeUnit.SECONDS.sleep(3);
                     } catch(SQLException e) {
                         System.out.println("Eroarea este:" + e);
